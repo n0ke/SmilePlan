@@ -1,12 +1,12 @@
 {
   "expo": {
-    "name": "smile-plan-tela-login",
-    "slug": "snack-dda1ce74-7573-4327-885f-708d988b1958",
+    "name": "SmilePlan",
+    "slug": "SmilePlan",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
-    "splash": { 
+    "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"

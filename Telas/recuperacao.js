@@ -10,12 +10,12 @@ import {
     View,
     Button,
   } from 'react-native';
-  
+  import { useNavigation } from '@react-navigation/native';
   import { useState } from 'react';
   
   export default function recuperacao() {
     const [visivel, setVisivel] = useState(false);
-  
+    const navigation = useNavigation();
     const usuario = 'joao';
     const senha = '1234';
     const [entradaUsuario, setEntradaUsuario] = useState('');
@@ -46,7 +46,7 @@ import {
         <View style={styles.viewLogo}>
           <Image
             style={styles.logo}
-            source={require('/assets/Logo-Smile-Plan-Azul.png')}
+            source={require('./assets/Logo-Smile-Plan-Azul.png')}
           />
         </View>
   
@@ -68,7 +68,7 @@ import {
         <View style={styles.rodapeCadastro}>
           <Text style={styles.txtEnviar}>
             Não Possui uma Conta?
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('cadastro')}>
               <Text style={styles.cadastreSe}> Cadastre-se!</Text>
             </TouchableOpacity>
           </Text>

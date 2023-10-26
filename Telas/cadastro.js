@@ -10,10 +10,11 @@ import {
     TouchableOpacity,
     View,
   } from 'react-native';
-  
+  import { useNavigation } from '@react-navigation/native';
   import { useState } from 'react';
   
   export default function cadastro() {
+    const navigation = useNavigation();
     const [visivel, setVisivel] = useState(false);
   
     const usuario = 'joao';
@@ -46,8 +47,8 @@ import {
         <View style={styles.viewLogo}>
           <Image
             style={styles.logo}
-            source={require('/assets/Logo-Smile-Plan-Azul.png')}
-          />
+            source={require('./assets/Logo-Smile-Plan-Azul.png')}
+            />
         </View>
   
         <Text style={styles.textoUsuario}>Criar Conta</Text>
@@ -103,7 +104,7 @@ import {
         <View style={styles.rodapeCadastro}>
           <Text style={styles.txtRodape}>
             Já possui uma Conta?
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('login')}>
               <Text style={styles.facaLogin}> Faça login!</Text>
             </TouchableOpacity>
           </Text>
@@ -114,7 +115,6 @@ import {
   
   const styles = StyleSheet.create({
     background: {
-      flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
       backgroundColor: '#F8F7F3',
@@ -127,14 +127,10 @@ import {
       paddingTop: 0,
       justifyContent: 'space-around',
     },
-  
     logo: {
       height: 79,
       width: 294,
-      marginTop: 10,
-      marginLeft: -180,
-      width: '28%',
-      resizeMode: 'center',
+      marginTop: 100,
     },
   
     textoUsuario: {
@@ -172,7 +168,7 @@ import {
   
     rodapeCadastro: {
       backgroundColor: '#4F4F4F',
-      width: '110%',
+      width: '100%',
       height: 90,
       alignItems: 'center',
       justifyContent: 'center',
