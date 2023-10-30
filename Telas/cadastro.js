@@ -126,23 +126,24 @@ import {
       alignItems: 'center',
       justifyContent: 'center',
       backgroundColor: '#F8F7F3',
-      padding: 8,
+      padding: 0,
+      flex: 1,
     },
   
     viewLogo: {
-      flex: 1,
-      flexDirection: 'row',
       paddingTop: 0,
+      paddingBottom: '20%',
       justifyContent: 'space-around',
     },
     logo: {
+      paddingLeft: 0,
       height: 79,
       width: 294,
       marginTop: 100,
     },
   
     textoUsuario: {
-      fontSize: 30,
+      fontSize: 48,
       fontWeight: 'bold',
       marginBottom: 50,
       textAlign: 'center',
@@ -180,8 +181,9 @@ import {
       height: 90,
       alignItems: 'center',
       justifyContent: 'center',
-      borderRadius: 7,
-      marginBottom: -10,
+      borderRadius: 0,
+      position: 'absolute',
+      bottom: 0,
     },
   
     txtRodape: {
