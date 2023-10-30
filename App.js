@@ -8,17 +8,24 @@ import { StyleSheet, Text, View } from 'react-native';
 import login from './Telas/login';
 import cadastro from './Telas/cadastro';
 import recuperacao from './Telas/recuperacao';
+import inicio from './Telas/Inicio';
+import { createTables } from './Telas//Banco_de_dados/db.js'; 
 
 
 const Stack = createNativeStackNavigator();
 
 function App() {
+
+  React.useEffect(() => {
+    createTables();
+  }, []);
   return (
     <NavigationContainer>
       <Stack.Navigator  initialRouteName="login">
         <Stack.Screen name="login" component={login} />
         <Stack.Screen name="cadastro" component={cadastro} />
         <Stack.Screen name="recuperacao" component={recuperacao} />
+        <Stack.Screen name="inicio" component={inicio} />
       </Stack.Navigator>
     </NavigationContainer>
   );

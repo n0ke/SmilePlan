@@ -2,35 +2,37 @@ import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import {
   Text,
-  KeyboardAvoidingView,
-  TouchableOpacity,
-  Modal,
-  StyleSheet,
   Image,
   TextInput,
   View,
-  Button,
+  TouchableOpacity,
+  StyleSheet,
   ScrollView,
 } from 'react-native';
+//import { retrievePassword } from './Banco_de_dados/db.js'; // Importe a função de recuperação de senha
+import { login } from './Banco_de_dados/db.js'; // Importe a função de inserção de usuário
 
 export default function Login() {
-
   const navigation = useNavigation();
-  const [visivel, setVisivel] = useState(false);
-  const usuario = 'joao';
-  const senha = '1234';
-  const [entradaUsuario, setEntradaUsuario] = useState('');
+  const [entradaEmail, setEntradaEmail] = useState('');
   const [entradaSenha, setEntradaSenha] = useState('');
-  const [texto, setTexto] = useState('');
+  const [mensagem, setMensagem] = useState('');
+  const [visivel, setVisivel] = useState(false);
 
-  function validaSenha() {
-    if (entradaUsuario === usuario && entradaSenha === senha) {
-      setTexto('Senha correta!');
-    } else {
-      setTexto('Usuário/Senha inválido.');
+  const loginUsuario = async () => {
+    try {
+      const result = await login(entradaEmail, entradaSenha);
+      
+      if (result === 1) {
+        navigation.navigate('inicio'); // Se o login for bem-sucedido, navega para a página 'inicio'
+      } else {
+        console.log(result); // Trata outras situações de login (senhas incorretas, usuário não encontrado)
+      }
+    } catch (error) {
+      console.error('Erro durante o login:', error);
     }
-    setVisivel(true);
-  }
+  };
+  
 
   return (
     <ScrollView contentContainerStyle={styles.background}>
@@ -47,7 +49,7 @@ export default function Login() {
         style={styles.caixaDeTextoUsuario}
         placeholder="Digite seu usuário"
         autoCorrect={false}
-        onChangeText={(valor) => setEntradaUsuario(valor)}
+        onChangeText={(valor) => setEntradaEmail(valor)}
       />
 
       <Text style={styles.textoSenha}>Senha</Text>
@@ -67,7 +69,7 @@ export default function Login() {
         </TouchableOpacity>
       </Text>
 
-      <TouchableOpacity style={styles.btnEntrar} onPress={validaSenha}>
+      <TouchableOpacity style={styles.btnEntrar} onPress={loginUsuario}>
         <Text style={styles.txtEnviar}>Entrar</Text>
       </TouchableOpacity>
 
@@ -89,14 +91,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#F8F7F3',
-    width: '100%', // Defina a largura como 100%
+    width: '100%',
     padding: 16,
   },
   logo: {
-      height: 79,
-      width: 294,
-      marginTop: 100,
-    },
+    height: 79,
+    width: 294,
+    marginTop: 100,
+  },
   textoUsuario: {
     fontSize: 20,
     marginBottom: 10,

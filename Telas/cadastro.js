@@ -12,33 +12,55 @@ import {
   } from 'react-native';
   import { useNavigation } from '@react-navigation/native';
   import { useState } from 'react';
+  import { insertUser } from './Banco_de_dados/db.js'; // Importe a função de inserção de usuário
+
   
   export default function cadastro() {
-    const navigation = useNavigation();
-    const [visivel, setVisivel] = useState(false);
-  
-    const usuario = 'joao';
-    const senha = '1234';
-    const [entradaUsuario, setEntradaUsuario] = useState('');
-    const [entradaSenha, setEntradaSenha] = useState('');
-  
-    const [texto, setTexto] = useState('');
-  
-    function validaSenha() {
-      if (entradaUsuario == usuario && entradaSenha == senha) {
-        setTexto('Senha correta!');
-      } else {
-        setTexto('Usuário/Senha inválido.');
-      }
+
+  const navigation = useNavigation();
+  const [visivel, setVisivel] = useState(false);
+  const [entradaNome, setNome] = useState('');
+  const [entradaEmail, setEntradaEmail] = useState('');
+  const [entradaSenha, setEntradaSenha] = useState('');
+  const [confirmarSenha, setConfirmarSenha] = useState('');
+
+  const cadastrarUsuario = () => {
+    if (entradaSenha !== confirmarSenha) {
+      setMensagem('As senhas não coincidem.');
       setVisivel(true);
+      return;
     }
+    setVisivel(true);
+  };
+
+  function validaSenha() {
+    if (entradaSenha === confirmarSenha) {
+      // Senhas correspondem, então insere o usuário
+      insertUser(entradaNome, entradaEmail, entradaSenha).then((result) => {
+          // Ação em caso de sucesso na inserção do usuário
+          navigation.navigate('inicio')
+          // Outras ações em caso de sucesso...
+          setVisivel(true); // Define visibilidade como true após a inserção do usuário
+        })
+        .catch((error) => {
+          // Ação em caso de erro na inserção do usuário
+          console.error('Erro ao inserir usuário:', error.message);
+          // Outras ações em caso de erro...
+          setVisivel(true); // Define visibilidade como true, mesmo em caso de erro
+        });
+    } else {
+      console.log('Senhas não correspondem');
+      setVisivel(true); // Define visibilidade como true, pois a validação da senha falhou
+    }
+  }
+  
   
     return (
       <KeyboardAvoidingView style={styles.background}>
         <View>
           <Modal animationType="slide" transparent={true} visible={visivel}>
             <View style={styles.bxModal}>
-              <Text style={styles.txtModal}>{texto}</Text>
+              <Text style={styles.txtModal}>{}</Text>
               <Button title="Fechar" onPress={() => setVisivel(false)} />
             </View>
           </Modal>
@@ -55,30 +77,16 @@ import {
   
         <TextInput
           style={styles.caixaDeTexto}
-          placeholder="Primeiro nome"
+          placeholder="Nome"
           autoCorrect={false}
-          onChangeText={(valor) => setEntradaUsuario(valor)}
+          onChangeText={(valor) => setNome(valor)}
         />
-  
-        <TextInput
-          style={styles.caixaDeTexto}
-          placeholder="Sobrenome"
-          autoCorrect={false}
-          onChangeText={(valor) => setEntradaSenha(valor)}
-        />
-  
+
         <TextInput
           style={styles.caixaDeTexto}
           placeholder="E-mail"
           autoCorrect={false}
-          onChangeText={(valor) => setEntradaSenha(valor)}
-        />
-  
-        <TextInput
-          style={styles.caixaDeTexto}
-          placeholder="Nome de Usuário"
-          autoCorrect={false}
-          onChangeText={(valor) => setEntradaSenha(valor)}
+          onChangeText={(valor) => setEntradaEmail(valor)}
         />
   
         <TextInput
@@ -94,11 +102,11 @@ import {
           placeholder="Confirmar Senha"
           autoCorrect={false}
           secureTextEntry={true}
-          onChangeText={(valor) => setEntradaSenha(valor)}
+          onChangeText={(valor) => setConfirmarSenha(valor)}
         />
   
         <TouchableOpacity style={styles.btnCadastrar} onPress={validaSenha}>
-          <Text style={styles.txtCadastrar}>Castrar</Text>
+          <Text style={styles.txtCadastrar}>Cadastrar</Text>
         </TouchableOpacity>
   
         <View style={styles.rodapeCadastro}>
