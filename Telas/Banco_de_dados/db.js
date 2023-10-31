@@ -5,7 +5,7 @@ const db = SQLite.openDatabase('myDB.db');
 const createTables = () => {
   db.transaction(tx => {
     tx.executeSql(
-      'CREATE TABLE users (id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, password TEXT, email TEXT)',
+      'CREATE TABLE IF NOT EXIST users (id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, password TEXT, email TEXT)',
       [],
       () => {
         console.log('Tabela de usuários criada com sucesso!');
@@ -14,6 +14,18 @@ const createTables = () => {
         console.log('Erro ao criar a tabela de usuários: ' + error);
       }
     );
+    tx.executeSql(
+      'CREATE TABLE IF NOT EXIST Consultas (id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, telefone TEXT, dia TEXT, hora TEXT, procedimento TEXT, obs TEXT)',
+      [],
+      () => {
+        console.log('Tabela de consultas criada com sucesso!');
+      },
+      (_, error) => {
+        console.log('Erro ao criar a tabela de consultas: ' + error);
+      }
+    );
+    
+    
   });
 };
 

@@ -91,13 +91,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#F8F7F3',
-<<<<<<< Updated upstream
-    width: '100%',
-    padding: 16,
-=======
     width: '100%', // Defina a largura como 100%
     padding: 0,
->>>>>>> Stashed changes
   },
   logo: {
     height: 79,
