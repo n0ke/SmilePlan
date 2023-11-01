@@ -37,75 +37,95 @@ import {
     };
   
     return (
-      <ScrollView contentContainerStyle={styles.background}>
-        <View>
-          <Modal animationType="slide" transparent={true} visible={visivel}>
-            <View style={styles.bxModal}>
-              <Text style={styles.txtModal}>{}</Text>
-              <Button title="Fechar" onPress={() => setVisivel(false)} />
-            </View>
-          </Modal>
-        </View>
-  
-        <View style={styles.viewLogo}>
-          <Image
-            style={styles.logo}
-            source={require('./assets/Logo-Smile-Plan-Azul.png')}
+      <View style={styles.container}>
+        <ScrollView contentContainerStyle={styles.background}>
+          <View>
+            <Modal animationType="slide" transparent={true} visible={visivel}>
+              <View style={styles.bxModal}>
+                <Text style={styles.txtModal}>{}</Text>
+                <Button title="Fechar" onPress={() => setVisivel(false)} />
+              </View>
+            </Modal>
+          </View>
+    
+          <View style={styles.viewLogo}>
+            <Image
+              style={styles.logo}
+              source={require('./assets/Logo-Smile-Plan-Azul.png')}
+            />
+          </View>
+    
+          <Text style={styles.textoUsuario}>Cadastro de Consulta</Text>
+    
+          <TextInput
+            style={styles.caixaDeTexto}
+            placeholder="Nome"
+            autoCorrect={false}
+            onChangeText={valor => setNome(valor)}
           />
+    
+          <TextInput
+            style={styles.caixaDeTexto}
+            placeholder="Telefone"
+            autoCorrect={false}
+            onChangeText={valor => setTelefone(valor)}
+          />
+    
+          <TextInput
+            style={styles.caixaDeTexto}
+            placeholder="Dia"
+            autoCorrect={false}
+            onChangeText={valor => setDia(valor)}
+          />
+    
+          <TextInput
+            style={styles.caixaDeTexto}
+            placeholder="Hora"
+            autoCorrect={false}
+            onChangeText={valor => setHora(valor)}
+          />
+    
+          <TextInput
+            style={styles.caixaDeTexto}
+            placeholder="Procedimento"
+            autoCorrect={false}
+            onChangeText={valor => setProcedimento(valor)}
+          />
+    
+          <TextInput
+            style={styles.caixaDeTexto}
+            placeholder="Observações"
+            autoCorrect={true}
+            onChangeText={valor => setObs(valor)}
+          />
+    
+          <TouchableOpacity style={styles.btnCadastrar} onPress={cadastrarConsulta}>
+            <Text style={styles.txtCadastrar}>Cadastrar Consulta</Text>
+          </TouchableOpacity>
+        </ScrollView>
+
+        <View style={styles.footer}>
+          <TouchableOpacity onPress={() => navigation.navigate('cadastroConsulta')} style={styles.footerButton}>
+            <Text style={styles.footerButtonText}>Agendar</Text>
+          </TouchableOpacity>
+          <View style={styles.separator}></View>
+          <TouchableOpacity  onPress={() => navigation.navigate('inicio')}  style={styles.footerButton}>
+            <Text style={styles.footerButtonText}>Início</Text>
+          </TouchableOpacity>
+          <View style={styles.separator}></View>
+          <TouchableOpacity onPress={() => navigation.navigate('consultas')}  style={styles.footerButton}>
+            <Text style={styles.footerButtonText}>Consultas</Text>
+          </TouchableOpacity>
         </View>
-  
-        <Text style={styles.textoUsuario}>Cadastro de Consulta</Text>
-  
-        <TextInput
-          style={styles.caixaDeTexto}
-          placeholder="Nome"
-          autoCorrect={false}
-          onChangeText={valor => setNome(valor)}
-        />
-  
-        <TextInput
-          style={styles.caixaDeTexto}
-          placeholder="Telefone"
-          autoCorrect={false}
-          onChangeText={valor => setTelefone(valor)}
-        />
-  
-        <TextInput
-          style={styles.caixaDeTexto}
-          placeholder="Dia"
-          autoCorrect={false}
-          onChangeText={valor => setDia(valor)}
-        />
-  
-        <TextInput
-          style={styles.caixaDeTexto}
-          placeholder="Hora"
-          autoCorrect={false}
-          onChangeText={valor => setHora(valor)}
-        />
-  
-        <TextInput
-          style={styles.caixaDeTexto}
-          placeholder="Procedimento"
-          autoCorrect={false}
-          onChangeText={valor => setProcedimento(valor)}
-        />
-  
-        <TextInput
-          style={styles.caixaDeTexto}
-          placeholder="Observações"
-          autoCorrect={true}
-          onChangeText={valor => setObs(valor)}
-        />
-  
-        <TouchableOpacity style={styles.btnCadastrar} onPress={cadastrarConsulta}>
-          <Text style={styles.txtCadastrar}>Cadastrar Consulta</Text>
-        </TouchableOpacity>
-      </ScrollView>
+      </View>
     );
   }
   
   const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: '#f7f7f7',
+    },
     background: {
       alignItems: 'center',
       justifyContent: 'center',
@@ -114,7 +134,7 @@ import {
       flex: 1,
     },
     viewLogo: {
-      marginRight: '50%',
+      marginRight: '50%', //  Descobri como manda a logo pra esquerda como no design!
       paddingTop: 0,
       paddingBottom: 20,
       justifyContent: 'space-around',
@@ -152,6 +172,32 @@ import {
     txtCadastrar: {
       color: '#FFF',
       fontSize: 20,
+    },
+    footer: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      backgroundColor: '#333',
+      padding: 9,
+      paddingBottom: 9,
+      position: 'absolute',
+      bottom: 0,
+      left: 0,
+      right: 0,
+    },
+    footerButton: {
+      flex: 1,
+      backgroundColor: '#333',
+      padding: 10,
+      borderRadius: 10,
+      alignItems: 'center',
+    },
+    footerButtonText: {
+      color: 'white',
+      fontWeight: 'bold',
+    },
+    separator: {
+      width: 1,
+      backgroundColor: 'white',
     },
   });
   
