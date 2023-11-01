@@ -136,7 +136,6 @@ import {
       justifyContent: 'space-around',
     },
     logo: {
-      paddingLeft: 0,
       height: 79,
       width: 294,
       marginTop: 100,

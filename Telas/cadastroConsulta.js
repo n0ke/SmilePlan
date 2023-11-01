@@ -1,7 +1,7 @@
 import {
     Button,
     Image,
-    KeyboardAvoidingView,
+    ScrollView,
     Modal,
     SafeAreaView,
     StyleSheet,
@@ -37,7 +37,7 @@ import {
     };
   
     return (
-      <KeyboardAvoidingView style={styles.background}>
+      <ScrollView contentContainerStyle={styles.background}>
         <View>
           <Modal animationType="slide" transparent={true} visible={visivel}>
             <View style={styles.bxModal}>
@@ -101,13 +101,57 @@ import {
         <TouchableOpacity style={styles.btnCadastrar} onPress={cadastrarConsulta}>
           <Text style={styles.txtCadastrar}>Cadastrar Consulta</Text>
         </TouchableOpacity>
-      </KeyboardAvoidingView>
+      </ScrollView>
     );
   }
   
   const styles = StyleSheet.create({
-    // ... (Estilos existentes)
-  
-    // Novos estilos para a tela de cadastro de consulta
+    background: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: '#F8F7F3',
+      padding: 0,
+      flex: 1,
+    },
+    viewLogo: {
+      marginRight: '50%',
+      paddingTop: 0,
+      paddingBottom: 20,
+      justifyContent: 'space-around',
+    },
+    logo: {
+      height: 79 * .5,
+      width: 294 * .5,
+      marginTop: 100,
+    },
+    caixaDeTexto: {
+      backgroundColor: '#F8F7F3',
+      width: '90%',
+      marginBottom: 20,
+      fontSize: 20,
+      borderRadius: 15,
+      padding: 10,
+      borderWidth: 1,
+    },
+    textoUsuario: {
+      fontSize: 48,
+      fontWeight: 'bold',
+      marginBottom: 50,
+      textAlign: 'center',
+    },
+    btnCadastrar: {
+      backgroundColor: '#00CCCB',
+      width: '30%',
+      height: 45,
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderRadius: 70,
+      marginTop: 30,
+      marginBottom: 30,
+    },
+    txtCadastrar: {
+      color: '#FFF',
+      fontSize: 20,
+    },
   });
   
