@@ -1,10 +1,35 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { listarConsultas } from './Banco_de_dados/db.js';
+
 
 const inicio = () => {
 
-    const navigation = useNavigation();
+  const navigation = useNavigation();
+  const [consultas, setConsultas] = useState([]);
+
+  useEffect(() => {
+    const carregarConsultas = async () => {
+      try {
+        const consultasDoBanco = await listarConsultas();
+        setConsultas(consultasDoBanco);
+      } catch (error) {
+        console.error('Erro ao carregar consultas:', error);
+      }
+    };
+
+    carregarConsultas();
+  }, []);
+
+  const filtrarConsultasPorStatus = (status) => {
+    return consultas.filter((consulta) => consulta.status === status);
+  };
+
+  const consultasPendentes = filtrarConsultasPorStatus(0);
+  const consultasConfirmadas = filtrarConsultasPorStatus(1);
+  const consultasCanceladas = filtrarConsultasPorStatus(2);
+
 
   return (
     <View style={styles.container}>

@@ -12,7 +12,7 @@ import {
   } from 'react-native';
   import { useNavigation } from '@react-navigation/native';
   import { useState } from 'react';
-  import { insertUser } from './Banco_de_dados/db.js'; // Importe a função de inserção de usuário
+  import { insertUser } from './Banco_de_dados/db.js'; 
 
   
   export default function cadastro() {
